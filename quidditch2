@@ -1,0 +1,34 @@
+mysql> SELECT t.name, COUNT(*) AS nb_players FROM player p JOIN team t ON t.id = p.team_id GROUP BY team_id ORDER BY nb_players DESC;
++------------+------------+
+| name       | nb_players |
++------------+------------+
+| Gryffindor |         36 |
+| Slytherin  |         21 |
+| Ravenclaw  |         15 |
+| Hufflepuff |         12 |
++------------+------------+
+4 rows in set (0,01 sec)
+
+mysql> SELECT t.name, COUNT(*) AS nb_players FROM player p JOIN team t ON t.id = p.team_id GROUP BY p.team_id HAVING nb_players >= 14 ORDER BY t.name ASC;
++------------+------------+
+| name       | nb_players |
++------------+------------+
+| Gryffindor |         36 |
+| Ravenclaw  |         15 |
+| Slytherin  |         21 |
++------------+------------+
+3 rows in set (0,01 sec)
+
+mysql> SELECT w.firstname, w.lastname,p.enrollment_xate FROM player p JOIN wizard w ON w.id = p.wizard_id WHERE p.team_id='1' && WEEKDAY(enrollment_xate)=0 ORDER BY enrollment_xate ASC;
++-----------+------------+-----------------+
+| firstname | lastname   | enrollment_xate |
++-----------+------------+-----------------+
+| George    | Weasley    | 1991-08-26      |
+| Alice     | Longbottom | 1992-02-17      |
+| Cadogan   |            | 1993-01-04      |
+| Godric    | Gryffindor | 1993-08-30      |
+| Sirius    | Black      | 1994-01-10      |
+| Aberforth | Dumbledore | 1995-04-24      |
+| Augusta   | Longbottom | 1999-10-25      |
++-----------+------------+-----------------+
+7 rows in set, 1 warning (0,00 sec)
